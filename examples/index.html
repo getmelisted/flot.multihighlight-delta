@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery flot multihighlight delta plugin example</title>
+
+  <script src="../js/vendor/jquery-1.9.0.js"></script>
+  <script src="../js/vendor/jquery.flot.js"></script>
+  <script src="../js/jquery.flot.multihighlight-delta.js"></script>
+
+  <script>
+
+    $(function () {
+
+      // Keyword Rank Chart
+      var chartData = [
+        {
+          label: 'Series 1',
+          data: [
+            [1, 23],
+            [2, 27],
+            [3, 23],
+            [4, 28],
+            [5, 31],
+          ],
+          color: '#db9d97'
+        },
+        {
+          label: 'Series 2',
+          data: [
+            [1, 53],
+            [2, 27],
+            [3, 13],
+            [4, 58],
+            [5, 11],
+          ],
+          color: '#6fb7de'
+        },
+        {
+          label: 'Series 3',
+          data: [
+            [1, 88],
+            [2, 4],
+            [3, 8],
+            [4, 7],
+            [5, 64],
+          ],
+          color: '#9e80a1'
+        }
+      ];
+      var chartOptions = {
+        series: {
+          points: {
+            show: true,
+            radius: 4
+          },
+          lines: {
+            show: true,
+            lineWidth: 2
+          },
+          shadowSize: 1
+        },
+        tooltip: true,
+        multihighlightdelta: {
+          mode: 'x',
+        },
+        xaxis: {
+
+        },
+        grid: {
+          hoverable: true,
+          autoHighlight: true,
+          clickable: true,
+        },
+        tooltipOpts: {
+          content: '%s value on %x: <b>%y</b>'
+        }
+      };
+
+      $.plot($('.chart-container'), chartData, chartOptions);
+    });
+
+  </script>
+
+</head>
+<body>
+
+<div class="chart-container" style="width: 500px; height: 350px;"></div>
+
+</body>
+</html>
