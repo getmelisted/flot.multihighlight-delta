@@ -29,7 +29,7 @@
         tooltipOffsetX: 20,
         tooltipOffsetY: 20,
         tooltipTemplate: '<table class="table"><thead><tr><th></th><th>Value</th><th>Delta</th></tr></thead><tbody><%= body %></tbody></table>',
-        dataPointTemplate: '<tr><td><%= series.label %></td><td><%= datapoint[1] %></td><td><%= delta %></td></tr>',
+        dataPointTemplate: '<tr><td><%= series.label %></td><td><%= datapoint[1] %></td><td><%= (delta > 0 ? "+" : "") %><%= delta %></td></tr>',
         tooltipStyles: {
           position: 'absolute',
           display: 'none',
