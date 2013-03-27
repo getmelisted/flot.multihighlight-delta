@@ -178,10 +178,36 @@
         });
 
         var $tooltip = this.findOrCreateTooltip(options.tooltipStyles);
-        $tooltip.html(tooltipText).css({
-          left: position.pageX + options.tooltipOffsetX,
-          top: position.pageY + options.tooltipOffsetY
-        }).show();
+
+        // If we are going to overflow outside the screen's dimensions, display it to the left instead
+
+
+        var xPositionProperty = 'left';
+        var yPositionProperty = 'top';
+        var xPosition = position.pageX + options.tooltipOffsetX;
+        var yPosition = position.pageY + options.tooltipOffsetY;
+        $tooltip.html(tooltipText); // So that we can use dimensions right away, we set the content immediately
+        var tooltipWidth = $tooltip.width();
+        var tooltipHeight = $tooltip.height();
+        var css = {
+          top: 'auto',
+          left: 'auto',
+          right: 'auto',
+          bottom: 'auto'
+        };
+
+        if (xPosition + tooltipWidth > window.document.width){
+          xPositionProperty = 'right';
+          xPosition = Math.abs(window.document.width - position.pageX) + options.tooltipOffsetX;
+        }
+        if (yPosition + tooltipHeight > window.document.height){
+          yPositionProperty = 'bottom';
+          yPosition = Math.abs(window.document.height - position.pageY) - options.tooltipOffsetY;
+        }
+
+        css[xPositionProperty] = xPosition;
+        css[yPositionProperty] = yPosition;
+        $tooltip.css(css).show();
       }
     },
     onMouseOut: function () {
