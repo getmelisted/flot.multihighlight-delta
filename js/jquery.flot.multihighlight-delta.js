@@ -116,11 +116,11 @@
     },
     findOrCreateTooltip: function (tooltipStyles) {
       var $tip = null;
-      if ($('#flotTip').length > 0) {
-        $tip = $('#flotTip');
+      if ($('#flotMultihighlightTip').length > 0) {
+        $tip = $('#flotMultihighlightTip');
       }
       else {
-        $tip = $('<div />').attr('id', 'flotTip').css(tooltipStyles).appendTo('body');
+        $tip = $('<div />').attr('id', 'flotMultihighlightTip').addClass('flot-tooltip').css(tooltipStyles).appendTo('body');
       }
       return $tip;
     },
@@ -214,7 +214,12 @@
     },
     onMouseOut: function () {
       this.plot.unhighlight();
-      $('#flotTip').hide();
+      $('#flotMultihighlightTip').hide().css({
+        top: 'auto',
+        left: 'auto',
+        right: 'auto',
+        bottom: 'auto'
+      });
     }
   };
 
