@@ -196,13 +196,15 @@
           bottom: 'auto'
         };
 
-        if (xPosition + tooltipWidth > window.document.width){
+        var pageWidth = window.innerWidth;
+        var pageHeight = window.innerHeight;
+        if (xPosition + tooltipWidth > pageWidth){
           xPositionProperty = 'right';
-          xPosition = Math.abs(window.document.width - position.pageX) + options.tooltipOffsetX;
+          xPosition = pageWidth - position.pageX + options.tooltipOffsetX;
         }
-        if (yPosition + tooltipHeight > window.document.height){
+        if (yPosition + tooltipHeight > pageHeight){
           yPositionProperty = 'bottom';
-          yPosition = Math.abs(window.document.height - position.pageY) - options.tooltipOffsetY;
+          yPosition = pageHeight - position.pageY + options.tooltipOffsetY;
         }
 
         css[xPositionProperty] = xPosition;
