@@ -30,6 +30,7 @@
         tooltipOffsetY: 20,
         tooltipTemplate: '<table class="table"><thead><tr><th></th><th>Value</th><th>Delta</th></tr></thead><tbody><%= body %></tbody></table>',
         dataPointTemplate: '<tr><td><%= series.label %></td><td><%= datapoint[1] %></td><td><%= (delta > 0 ? "+" : "") %><%= delta %></td></tr>',
+        transformDataPointData: false,
         tooltipStyles: {
           position: 'absolute',
           display: 'none',
@@ -164,12 +165,15 @@
           var delta = matchingDataPoints[i].delta;
           this.plot.highlight(seriesData, dataPoint);
 
-          var text = this.dataPointTemplate({
+          var data = {
             series: seriesData,
             datapoint: dataPoint,
             delta: delta
-          });
-
+          };
+          if (options.transformDataPointData){
+            data = options.transformDataPointData(data);
+          }
+          var text = this.dataPointTemplate(data);
           childrenTexts.push(text);
         }
 

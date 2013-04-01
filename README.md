@@ -40,7 +40,9 @@ simply won't see it, refer to the source code for more details.
 ## Templates
 
 There are two templates that allow you to customize the look and feel of the tooltip. They use John Resig's micro
-templating implementation, found [here](http://ejohn.org/blog/javascript-micro-templating/)
+templating implementation, found [here](http://ejohn.org/blog/javascript-micro-templating/). You can also provide a
+`transformDataPointData` function which will also you to transform the data before it gets to the templates, for example
+to convert a date to a readable format.
 
 ### tooltipTemplate
 
@@ -54,3 +56,9 @@ This template is rendered for every matching data point. It receives the followi
 - datapoint: The matching flot data point, ususally an array of two values [x,y]
 - delta: The delta with the previous value, if any
 
+### transformDataPointData: function
+
+A function which accepts a single argument containing the objects that the `dataPointTemplate` would normally receive.
+
+_BE WARNED_: The objects are passed by reference, so modifying them will in fact modify the objects themselves. For
+example if you do a .datapoint[0] = 'test', the datapoint's value will be changed.
